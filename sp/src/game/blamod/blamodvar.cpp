@@ -115,7 +115,7 @@ static void ApplyCategory()
 
 	// Don't reset sandbox vars
 	if (blamod_sandbox.GetBool()) {
-		Msg(">>>> Samdbox mode %s\n", BlamodMountName.String());
+		Msg(">>>> Sandbox mode %s\n", BlamodMountName.String());
 		return;
 	}
 

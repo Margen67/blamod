@@ -156,7 +156,7 @@ static impactdamagetable_t gCappedPlayerImpactDamageTable =
 
 };
 
-ConVar bla_lagacy_flashlight("blamod_lagacy_flashlight", "1",
+ConVar bla_legacy_flashlight("blamod_legacy_flashlight", "1",
 							 FCVAR_REPLICATED,
 							 "Set flashlight energy source.\n0: Separate, 1: AUX Power");
 
@@ -165,7 +165,7 @@ bool g_bUseLegacyFlashlight = true;
 bool Flashlight_UseLegacyVersion( void )
 {
 	// Return the results
-	return bla_lagacy_flashlight.GetBool();
+	return bla_legacy_flashlight.GetBool();
 }
 
 //-----------------------------------------------------------------------------
