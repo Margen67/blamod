@@ -1038,10 +1038,10 @@ void CPlayerPickupController::Init( CBasePlayer *pPlayer, CBaseEntity *pObject )
 	}
 
 	CHL2_Player *pOwner = (CHL2_Player *)ToBasePlayer( pPlayer );
-	if ( pOwner )
-	{
-		pOwner->EnableSprint( false );
-	}
+	//if ( pOwner )
+	//{
+	//	pOwner->EnableSprint( false );
+	//}
 
 	// If the target is debris, convert it to non-debris
 	if ( pObject->GetCollisionGroup() == COLLISION_GROUP_DEBRIS )
@@ -2803,7 +2803,7 @@ bool CWeaponPhysCannon::AttachObject( CBaseEntity *pObject, const Vector &vPosit
 		// NVNT set the players constant force to simulate holding mass
 		HapticSetConstantForce(pOwner,clamp(m_grabController.GetLoadWeight()*0.05,1,5)*Vector(0,-1,0));
 #endif
-		pOwner->EnableSprint( false );
+		//pOwner->EnableSprint( false );
 
 		float	loadWeight = ( 1.0f - GetLoadPercentage() );
 		float	maxSpeed = hl2_walkspeed.GetFloat() + ( ( hl2_normspeed.GetFloat() - hl2_walkspeed.GetFloat() ) * loadWeight );
