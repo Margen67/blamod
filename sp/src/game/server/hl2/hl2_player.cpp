@@ -512,9 +512,9 @@ void CHL2_Player::HandleSpeedChanges( void )
 	// have suit, pressing button, not sprinting
 	bool bWantWalking;
 	
-	if( (m_nButtons & IN_WALK) && !IsSprinting() )
+	if( IsSuitEquipped() )
 	{
-		bWantWalking = true;
+		bWantWalking = (m_nButtons & IN_WALK) && !IsSprinting() /*&& !(m_nButtons & IN_DUCK)*/;
 	}
 	else
 	{
@@ -667,14 +667,14 @@ void CHL2_Player::PreThink(void)
  			m_fAutoSprintMinTime = gpGlobals->curtime + 0.5f;
  		}
  	}
-// 	else if ( IsSprinting() )
-// 	{
-// 		// Disable sprint while ducked unless we're in the air (jumping)
-// 		if ( IsDucked() && ( GetGroundEntity() != NULL ) )
-// 		{
-// 			StopSprinting();
-// 		}
-// 	}
+ 	else if ( IsSprinting() )
+ 	{
+ 		// Disable sprint while ducked unless we're in the air (jumping)
+ 		if ( IsDucked() && ( GetGroundEntity() != NULL ) )
+ 		{
+ 			StopSprinting();
+ 		}
+ 	}
  #endif
 
 	VPROF_SCOPE_END();
