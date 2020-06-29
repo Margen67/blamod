@@ -2374,12 +2374,12 @@ bool CGameMovement::CheckJumpButton( void )
 		return false;		// don't pogo stick
 
 	// Cannot jump while in the unduck transition.
-	if ( player->m_Local.m_bDucking && (  player->GetFlags() & FL_DUCKING ) )
-		return false;
+	//if ( player->m_Local.m_bDucking && (  player->GetFlags() & FL_DUCKING ) )
+	//	return false;
 
 	// Still updating the eye position.
-	if ( player->m_Local.m_flDuckJumpTime > 0.0f )
-		return false;
+	//if ( player->m_Local.m_flDuckJumpTime > 0.0f )
+	//	return false;
 
 
 	// In the air now.

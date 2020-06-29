@@ -509,12 +509,12 @@ void CHL2_Player::HandleSpeedChanges( void )
 	}
 
 	bool bIsWalking = IsWalking();
-	// have suit, pressing button, not sprinting or ducking
+	// have suit, pressing button, not sprinting
 	bool bWantWalking;
 	
-	if( IsSuitEquipped() )
+	if( (m_nButtons & IN_WALK) && !IsSprinting() )
 	{
-		bWantWalking = (m_nButtons & IN_WALK) && !IsSprinting() /*&& !(m_nButtons & IN_DUCK)*/;
+		bWantWalking = false;
 	}
 	else
 	{
@@ -645,37 +645,37 @@ void CHL2_Player::PreThink(void)
 	HandleArmorReduction();
 #endif
 
-#if 0
-	if( sv_stickysprint.GetBool() && m_bIsAutoSprinting )
-	{
-		// If we're ducked and not in the air
-		if( IsDucked() && GetGroundEntity() != NULL )
-		{
-			StopSprinting();
-		}
-		// Stop sprinting if the player lets off the stick for a moment.
-		else if( GetStickDist() == 0.0f )
-		{
-			if( gpGlobals->curtime > m_fAutoSprintMinTime )
-			{
-				StopSprinting();
-			}
-		}
-		else
-		{
-			// Stop sprinting one half second after the player stops inputting with the move stick.
-			m_fAutoSprintMinTime = gpGlobals->curtime + 0.5f;
-		}
-	}
-	else if ( IsSprinting() )
-	{
-		// Disable sprint while ducked unless we're in the air (jumping)
-		if ( IsDucked() && ( GetGroundEntity() != NULL ) )
-		{
-			StopSprinting();
-		}
-	}
-#endif
+// #if 0
+// 	if( sv_stickysprint.GetBool() && m_bIsAutoSprinting )
+// 	{
+// 		// If we're ducked and not in the air
+// 		if( IsDucked() && GetGroundEntity() != NULL )
+// 		{
+// 			StopSprinting();
+// 		}
+// 		// Stop sprinting if the player lets off the stick for a moment.
+// 		else if( GetStickDist() == 0.0f )
+// 		{
+// 			if( gpGlobals->curtime > m_fAutoSprintMinTime )
+// 			{
+// 				StopSprinting();
+// 			}
+// 		}
+// 		else
+// 		{
+// 			// Stop sprinting one half second after the player stops inputting with the move stick.
+// 			m_fAutoSprintMinTime = gpGlobals->curtime + 0.5f;
+// 		}
+// 	}
+// 	else if ( IsSprinting() )
+// 	{
+// 		// Disable sprint while ducked unless we're in the air (jumping)
+// 		if ( IsDucked() && ( GetGroundEntity() != NULL ) )
+// 		{
+// 			StopSprinting();
+// 		}
+// 	}
+// #endif
 
 	VPROF_SCOPE_END();
 

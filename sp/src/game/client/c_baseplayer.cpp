@@ -95,7 +95,7 @@ static ConVar	cl_smoothtime	(
 	"0.1", 
 	0, 
 	"Smooth client's view after prediction error over this many seconds",
-	true, 0.01,	// min/max is 0.01/2.0
+	true, 0.0,	// min/max is 0.0/2.0
 	true, 2.0
 	 );
 
