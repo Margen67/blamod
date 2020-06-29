@@ -514,7 +514,7 @@ void CHL2_Player::HandleSpeedChanges( void )
 	
 	if( IsSuitEquipped() )
 	{
-		bWantWalking = (m_nButtons & IN_WALK) && !IsSprinting() && !(m_nButtons & IN_DUCK);
+		bWantWalking = (m_nButtons & IN_WALK) && !IsSprinting() /*&& !(m_nButtons & IN_DUCK)*/;
 	}
 	else
 	{
