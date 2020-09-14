@@ -33,7 +33,7 @@ jobs:
       run: |
         mkdir -vb \vs2013
         iwr https://download.microsoft.com/download/7/1/B/71BA74D8-B9A0-4E6C-9159-A8335D54437E/vs_community.exe -OutFile \vs2013\vs_community.exe
-        Start-Process \vs2013\vs_community "/Passive /NoRestart /Layout \vs2013" -NoNewWindow -Wait
+        Start-Process \vs2013\vs_community "/Passive /NoRestart /Layout \vs2013" -nnw -Wait
         rm -Recurse -Force                          `
           \vs2013\packages\*AdsSDK10*              ,`
           \vs2013\packages\*arm*                   ,`
@@ -128,7 +128,8 @@ jobs:
         mkdir -vb artifacts
         mv -vb build\src\game\client\Release\*.dll, build\src\game\server\Release\*.dll artifacts
     - uses: actions/upload-artifact@v2
-      if: success()
+      if: matrix.toolset == 'v120_xp'
       with:
         name: bin
         path: artifacts
+        if-no-files-found: error
