@@ -33,7 +33,7 @@ jobs:
       run: |
         mkdir -vb \vs2013
         iwr https://download.microsoft.com/download/7/1/B/71BA74D8-B9A0-4E6C-9159-A8335D54437E/vs_community.exe -OutFile \vs2013\vs_community.exe
-        Start-Process \vs2013\vs_community "/Passive /NoRestart /Layout \vs2013" -Wait -vb
+        Start-Process \vs2013\vs_community "/Passive /NoRestart /Layout \vs2013" -NoNewWindow -Wait
         rm -Recurse -Force                          `
           \vs2013\packages\*AdsSDK10*              ,`
           \vs2013\packages\*arm*                   ,`
@@ -112,7 +112,7 @@ jobs:
           \vs2013\AdminDeployment.xml              ,`
           \vs2013\autorun.inf
     - name: Install VS2013
-      run: Start-Process \vs2013\vs_community "/Passive /NoRestart /NoRefresh /NoWeb" -Wait -vb
+      run: Start-Process \vs2013\vs_community "/Passive /NoRestart /NoRefresh /NoWeb" -NoNewWindow -Wait
     - uses: actions/checkout@v2
     - name: CMake generate
       run: |
@@ -123,10 +123,12 @@ jobs:
       working-directory: build
       run: cmake --build . --config Release -j $env:NUMBER_OF_PROCESSORS
     - name: Prepare artifacts
+      if: matrix.toolset == 'v120_xp'
       run: |
         mkdir -vb artifacts
         mv -vb build\src\game\client\Release\*.dll, build\src\game\server\Release\*.dll artifacts
     - uses: actions/upload-artifact@v2
+      if: success()
       with:
         name: bin
         path: artifacts
