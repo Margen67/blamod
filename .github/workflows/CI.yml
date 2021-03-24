@@ -21,7 +21,6 @@ jobs:
       fail-fast: false
       matrix:
         toolset: [v120_xp, v120]
-        configuration: [Release, Debug]
     env:
       POWERSHELL_TELEMETRY_OPTOUT: 1
     steps:
@@ -35,8 +34,8 @@ jobs:
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
         mkdir \vs2013 && cd \vs2013 | Out-Null
-        curl -sSfLJO https://download.microsoft.com/download/7/1/B/71BA74D8-B9A0-4E6C-9159-A8335D54437E/vs_community.exe
-        Start-Process vs_community "/Passive /NoRestart /Layout ." -NoNewWindow -Wait
+        curl -sSLJO https://download.microsoft.com/download/7/1/B/71BA74D8-B9A0-4E6C-9159-A8335D54437E/vs_community.exe
+        Start-Process vs_community "/Passive /NoRestart /Layout ." -nnw -Wait
         rm -Recurse -Force -vb              `
           packages\*AdsSDK10*              ,`
           packages\*arm*                   ,`
@@ -116,7 +115,7 @@ jobs:
           autorun.inf                      ,`
           | Out-Null
     - name: Install VS2013
-      run: Start-Process \vs2013\vs_community "/Passive /NoRestart /NoRefresh /NoWeb" -NoNewWindow -Wait
+      run: Start-Process \vs2013\vs_community "/Passive /NoRestart /NoRefresh /NoWeb" -nnw -Wait
     - uses: actions/checkout@v2
     - name: CMake generate
       run: |
@@ -124,14 +123,12 @@ jobs:
         cmake -G "Visual Studio 12 2013" -T ${{ matrix.toolset }} ..\sp
     - name: Build
       working-directory: build
-      run: cmake --build . --config ${{ matrix.configuration }} -j $env:NUMBER_OF_PROCESSORS
+      run: cmake --build . --config Release -j $env:NUMBER_OF_PROCESSORS
     - name: Prepare artifacts
-      if: matrix.configuration == 'Release'
       run: |
         mkdir -vb artifacts | Out-Null
-        mv -vb build\src\game\client\${{ matrix.configuration }}\*.dll, build\src\game\server\${{ matrix.configuration }}\*.dll artifacts | Out-Null
+        mv -vb build\src\game\client\Release\*.dll, build\src\game\server\Release\*.dll artifacts | Out-Null
     - uses: actions/upload-artifact@v2
-      if: matrix.configuration == 'Release'
       with:
         name: ${{ matrix.toolset }}
         path: artifacts
