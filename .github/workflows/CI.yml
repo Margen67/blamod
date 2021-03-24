@@ -21,6 +21,7 @@ jobs:
       fail-fast: false
       matrix:
         toolset: [v120_xp, v120]
+        configuration: [Release, Debug]
     env:
       POWERSHELL_TELEMETRY_OPTOUT: 1
     steps:
@@ -34,88 +35,88 @@ jobs:
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
         mkdir \vs2013 && cd \vs2013 | Out-Null
-        curl -sSLJO https://download.microsoft.com/download/7/1/B/71BA74D8-B9A0-4E6C-9159-A8335D54437E/vs_community.exe
-        Start-Process vs_community "/Passive /NoRestart /Layout ." -nnw -Wait
-        rm -Recurse -Force -vb              `
-          packages\*AdsSDK10*              ,`
-          packages\*arm*                   ,`
-          packages\*Blend*                 ,`
-          packages\*Bliss*                 ,`
-          packages\*chs*                   ,`
-          packages\*cht*                   ,`
-          packages\*deu*                   ,`
-          packages\*Dotfuscator*           ,`
-          packages\*esn*                   ,`
-          packages\*fra*                   ,`
-          packages\*IISExpress*            ,`
-          packages\*IntelliTrace*          ,`
-          packages\*ita*                   ,`
-          packages\*jpn*                   ,`
-          packages\*kor*                   ,`
-          packages\*mobile*                ,`
-          packages\*MemoryProfiler*        ,`
-          packages\*Perf*                  ,`
-          packages\*Phone*                 ,`
-          packages\*ptb*                   ,`
-          packages\*rus                    ,`
-          packages\*Silverlight*           ,`
-          packages\*sql*                   ,`
-          packages\*TeamExplorer*          ,`
-          packages\*TypeScript*            ,`
-          packages\*UnitTest*              ,`
-          packages\*WP*                    ,`
-          packages\AppInsights             ,`
-          packages\Behaviors*              ,`
-          packages\CoreCon*                ,`
-          packages\cpp_rest*               ,`
-          packages\CT*                     ,`
-          packages\dac*                    ,`
-          packages\EspC*                   ,`
-          packages\EFTools*                ,`
-          packages\fsharp*                 ,`
-          packages\Help                    ,`
-          packages\kb2900961               ,`
-          packages\lightswitch*            ,`
-          packages\netfx*                  ,`
-          packages\PythonTools*            ,`
-          packages\ReleaseManagement*      ,`
-         "packages\Reporting Services"     ,`
-          packages\RIA                     ,`
-          packages\sdk_tools*              ,`
-          packages\sptools*                ,`
-          packages\SharedManagementObjects*,`
-          packages\SSCE40                  ,`
-          packages\SSDT*                   ,`
-          packages\TFS*                    ,`
-          packages\WcfDataServices         ,`
-          packages\WebDeploy               ,`
-          packages\Windows_SDK\*Metro*     ,`
-          packages\Windows_SDK\*Remote*    ,`
-          packages\Windows_SDK\Orca*       ,`
-          packages\WinACK                  ,`
-          packages\WinLibJS_CORE           ,`
-          packages\Verification*           ,`
-          packages\VSTO*                   ,`
-          packages\**\*arm*                ,`
-          packages\**\*chs*                ,`
-          packages\**\*cht*                ,`
-          packages\**\*csy*                ,`
-          packages\**\*deu*                ,`
-          packages\**\*esn*                ,`
-          packages\**\*fra*                ,`
-          packages\**\*ita*                ,`
-          packages\**\*jpn*                ,`
-          packages\**\*kor*                ,`
-          packages\**\*plk*                ,`
-          packages\**\*ptb*                ,`
-          packages\**\*rus*                ,`
-          packages\**\*trk*                ,`
-         "Standalone Profiler"             ,`
-          AdminDeployment.xml              ,`
-          autorun.inf                      ,`
-          | Out-Null
+        curl -sSfLJO https://download.microsoft.com/download/7/1/B/71BA74D8-B9A0-4E6C-9159-A8335D54437E/vs_community.exe
+        Start-Process vs_community "/Passive /NoRestart /Layout ." -NoNewWindow -Wait
+        rm -Recurse -Force -vb               `
+         "packages\*AdsSDK10*"              ,`
+         "packages\*arm*"                   ,`
+         "packages\*Blend*"                 ,`
+         "packages\*Bliss*"                 ,`
+         "packages\*chs*"                   ,`
+         "packages\*cht*"                   ,`
+         "packages\*deu*"                   ,`
+         "packages\*Dotfuscator*"           ,`
+         "packages\*esn*"                   ,`
+         "packages\*fra*"                   ,`
+         "packages\*IISExpress*"            ,`
+         "packages\*IntelliTrace*"          ,`
+         "packages\*ita*"                   ,`
+         "packages\*jpn*"                   ,`
+         "packages\*kor*"                   ,`
+         "packages\*mobile*"                ,`
+         "packages\*MemoryProfiler*"        ,`
+         "packages\*Perf*"                  ,`
+         "packages\*Phone*"                 ,`
+         "packages\*ptb*"                   ,`
+         "packages\*rus"                    ,`
+         "packages\*Silverlight*"           ,`
+         "packages\*sql*"                   ,`
+         "packages\*TeamExplorer*"          ,`
+         "packages\*TypeScript*"            ,`
+         "packages\*UnitTest*"              ,`
+         "packages\*WP*"                    ,`
+         "packages\AppInsights"             ,`
+         "packages\Behaviors*"              ,`
+         "packages\CoreCon*"                ,`
+         "packages\cpp_rest*"               ,`
+         "packages\CT*"                     ,`
+         "packages\dac*"                    ,`
+         "packages\EspC*"                   ,`
+         "packages\EFTools*"                ,`
+         "packages\fsharp*"                 ,`
+         "packages\Help"                    ,`
+         "packages\kb2900961"               ,`
+         "packages\lightswitch*"            ,`
+         "packages\netfx*"                  ,`
+         "packages\PythonTools*"            ,`
+         "packages\ReleaseManagement*"      ,`
+         "packages\Reporting Services"      ,`
+         "packages\RIA"                     ,`
+         "packages\sdk_tools*"              ,`
+         "packages\sptools*"                ,`
+         "packages\SharedManagementObjects*",`
+         "packages\SSCE40"                  ,`
+         "packages\SSDT*"                   ,`
+         "packages\TFS*"                    ,`
+         "packages\WcfDataServices"         ,`
+         "packages\WebDeploy"               ,`
+         "packages\Windows_SDK\*Metro*"     ,`
+         "packages\Windows_SDK\*Remote*"    ,`
+         "packages\Windows_SDK\Orca*"       ,`
+         "packages\WinACK"                  ,`
+         "packages\WinLibJS_CORE"           ,`
+         "packages\Verification*"           ,`
+         "packages\VSTO*"                   ,`
+         "packages\**\*arm*"                ,`
+         "packages\**\*chs*"                ,`
+         "packages\**\*cht*"                ,`
+         "packages\**\*csy*"                ,`
+         "packages\**\*deu*"                ,`
+         "packages\**\*esn*"                ,`
+         "packages\**\*fra*"                ,`
+         "packages\**\*ita*"                ,`
+         "packages\**\*jpn*"                ,`
+         "packages\**\*kor*"                ,`
+         "packages\**\*plk*"                ,`
+         "packages\**\*ptb*"                ,`
+         "packages\**\*rus*"                ,`
+         "packages\**\*trk*"                ,`
+         "Standalone Profiler"              ,`
+         "AdminDeployment.xml"              ,`
+         "autorun.inf"                      ,`
+           | Out-Null
     - name: Install VS2013
-      run: Start-Process \vs2013\vs_community "/Passive /NoRestart /NoRefresh /NoWeb" -nnw -Wait
+      run: Start-Process \vs2013\vs_community "/Passive /NoRestart /NoRefresh /NoWeb" -NoNewWindow -Wait
     - uses: actions/checkout@v2
     - name: CMake generate
       run: |
@@ -123,12 +124,14 @@ jobs:
         cmake -G "Visual Studio 12 2013" -T ${{ matrix.toolset }} ..\sp
     - name: Build
       working-directory: build
-      run: cmake --build . --config Release -j $env:NUMBER_OF_PROCESSORS
+      run: cmake --build . --config ${{ matrix.configuration }} -j $env:NUMBER_OF_PROCESSORS
     - name: Prepare artifacts
+      if: matrix.configuration == 'Release'
       run: |
         mkdir -vb artifacts | Out-Null
-        mv -vb build\src\game\client\Release\*.dll, build\src\game\server\Release\*.dll artifacts | Out-Null
+        mv -vb build\src\game\client\${{ matrix.configuration }}\*.dll, build\src\game\server\${{ matrix.configuration }}\*.dll artifacts | Out-Null
     - uses: actions/upload-artifact@v2
+      if: matrix.configuration == 'Release'
       with:
         name: ${{ matrix.toolset }}
         path: artifacts
