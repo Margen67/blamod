@@ -31,6 +31,7 @@ jobs:
          path: D:\vs2013
          key: vs2013
     - name: Download VS2013
+      shell: powershell #powershell preview is broken
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
         mkdir \vs2013 && cd \vs2013 | Out-Null
