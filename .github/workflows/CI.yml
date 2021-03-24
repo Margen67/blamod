@@ -114,7 +114,7 @@ jobs:
          "Standalone Profiler"              ,`
          "AdminDeployment.xml"              ,`
          "autorun.inf"                      ,`
-           | Out-Null
+          | Out-Null
     - name: Install VS2013
       run: Start-Process \vs2013\vs_community "/Passive /NoRestart /NoRefresh /NoWeb" -NoNewWindow -Wait
     - uses: actions/checkout@v2
