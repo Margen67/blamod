@@ -34,7 +34,7 @@ jobs:
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
         mkdir \vs2013 && cd \vs2013 | Out-Null
-        curl -sSfLJO https://download.microsoft.com/download/7/1/B/71BA74D8-B9A0-4E6C-9159-A8335D54437E/vs_community.exe
+        curl -fLJO https://download.microsoft.com/download/7/1/B/71BA74D8-B9A0-4E6C-9159-A8335D54437E/vs_community.exe
         Start-Process vs_community "/Passive /NoRestart /Layout ." -NoNewWindow -Wait
 #        rm -Recurse -Force -vb `
 #        packages\*AdsSDK10*, `
