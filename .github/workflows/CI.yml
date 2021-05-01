@@ -32,12 +32,12 @@ jobs:
 #         key: vs2013
     - name: Download VS2013
       #if: steps.cache.outputs.cache-hit != 'true'
-      shell: cmd
+      #shell: cmd
       run: |
         mkdir \vs2013 && cd \vs2013
         curl -fLJO "https://download.microsoft.com/download/7/1/B/71BA74D8-B9A0-4E6C-9159-A8335D54437E/vs_community.exe"
-        .\vs_community.exe /Passive /NoRestart /Layout .
-#        Start-Process .\vs_community.exe "/Passive /NoRestart /Layout ." -NoNewWindow -Wait
+        Start-Process .\vs_community.exe "/Passive /NoRestart /Layout ." -NoNewWindow -PassThru -Wait
+        rm -Recurse -Force -vb packages\*AdsSDK10*, packages\*arm*, packages\*Blend*, packages\*Bliss*, packages\*chs*, packages\*cht*, packages\*deu*, packages\*Dotfuscator*, packages\*esn*, packages\*fra*, packages\*IISExpress*, packages\*IntelliTrace*, packages\*ita*, packages\*jpn*, packages\*kor*, packages\*mobile*, packages\*MemoryProfiler*, packages\*Perf*, packages\*Phone*, packages\*ptb*, packages\*rus, packages\*Silverlight*, packages\*sql*, packages\*TeamExplorer*, packages\*TypeScript*, packages\*UnitTest*, packages\*WP*, packages\AppInsights, packages\Behaviors*, packages\CoreCon*, packages\cpp_rest*, packages\CT*, packages\dac*, packages\EspC*, packages\EFTools*, packages\fsharp*, packages\Help, packages\kb2900961, packages\lightswitch*, packages\netfx*, packages\PythonTools*, packages\ReleaseManagement*, "packages\Reporting Services", packages\RIA, packages\sdk_tools*, packages\sptools*, packages\SharedManagementObjects*, packages\SSCE40, packages\SSDT*, packages\TFS*, packages\WcfDataServices, packages\WebDeploy, packages\Windows_SDK\*Metro*, packages\Windows_SDK\*Remote*, packages\Windows_SDK\Orca*, packages\WinACK, packages\WinLibJS_CORE, packages\Verification*, packages\VSTO*, packages\**\*arm*, packages\**\*chs*, packages\**\*cht*, packages\**\*csy*, packages\**\*deu*, packages\**\*esn*, packages\**\*fra*, packages\**\*ita*, packages\**\*jpn*, packages\**\*kor*, packages\**\*plk*, packages\**\*ptb*, packages\**\*rus*, packages\**\*trk*, "Standalone Profiler", AdminDeployment.xml, autorun.inf | Out-Null
 #        rm -Recurse -Force -vb `
 #        packages\*AdsSDK10*, `
 #        packages\*arm*, `
@@ -117,9 +117,9 @@ jobs:
 #        autorun.inf, `
 #        | Out-Null
     - name: Install VS2013
-      shell: cmd
-      run: \vs2013\vs_community.exe /Passive /NoRestart /NoRefresh /NoWeb
-      #run: Start-Process \vs2013\vs_community.exe "/Passive /NoRestart /NoRefresh /NoWeb" -NoNewWindow -Wait
+      run: Start-Process \vs2013\vs_community.exe "/Passive /NoRestart /NoRefresh /NoWeb" -NoNewWindow -PassThru -Wait
+      #shell: cmd
+      #run: \vs2013\vs_community.exe /Passive /NoRestart /NoRefresh /NoWeb
     - uses: actions/checkout@v2
     - name: CMake generate
       run: |
