@@ -24,12 +24,12 @@ jobs:
     env:
       POWERSHELL_TELEMETRY_OPTOUT: 1
     steps:
-    - name: Cache VS2013
-      uses: actions/cache@v2
-      id: cache
-      with:
-         path: D:\vs2013
-         key: vs2013
+#    - name: Cache VS2013
+#      uses: actions/cache@v2
+#      id: cache
+#      with:
+#         path: D:\vs2013
+#         key: vs2013
     - name: Download VS2013
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
