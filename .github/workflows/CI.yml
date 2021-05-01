@@ -31,13 +31,14 @@ jobs:
 #         path: D:\vs2013
 #         key: vs2013
     - name: Download VS2013
-      if: steps.cache.outputs.cache-hit != 'true'
+      #if: steps.cache.outputs.cache-hit != 'true'
       run: |
-        mkdir \vs2013 && cd \vs2013 | Out-Null
-        echo "Before download = "(ls)
-        curl -fLJO https://download.microsoft.com/download/7/1/B/71BA74D8-B9A0-4E6C-9159-A8335D54437E/vs_community.exe
-        echo "After download = "(ls)
-        Start-Process .\vs_community.exe "/Passive /NoRestart /Layout ." -NoNewWindow -Wait
+        choco install visualstudiocommunity2013
+#        mkdir \vs2013 && cd \vs2013 | Out-Null
+#        echo "Before download = "(ls)
+#        curl -fLJO https://download.microsoft.com/download/7/1/B/71BA74D8-B9A0-4E6C-9159-A8335D54437E/vs_community.exe
+#        echo "After download = "(ls)
+#        Start-Process .\vs_community.exe "/Passive /NoRestart /Layout ." -NoNewWindow -Wait
 #        rm -Recurse -Force -vb `
 #        packages\*AdsSDK10*, `
 #        packages\*arm*, `
@@ -116,8 +117,8 @@ jobs:
 #        AdminDeployment.xml, `
 #        autorun.inf, `
 #        | Out-Null
-    - name: Install VS2013
-      run: Start-Process \vs2013\vs_community "/Passive /NoRestart /NoRefresh /NoWeb" -NoNewWindow -Wait
+#    - name: Install VS2013
+#      run: Start-Process \vs2013\vs_community.exe "/Passive /NoRestart /NoRefresh /NoWeb" -NoNewWindow -Wait
     - uses: actions/checkout@v2
     - name: CMake generate
       run: |
