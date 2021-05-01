@@ -34,7 +34,7 @@ jobs:
       #if: steps.cache.outputs.cache-hit != 'true'
       shell: cmd
       run: |
-        mkdir \vs2013 && cd \vs2013 | Out-Null
+        mkdir \vs2013 && cd \vs2013
         curl -fLJO "https://download.microsoft.com/download/7/1/B/71BA74D8-B9A0-4E6C-9159-A8335D54437E/vs_community.exe"
         Start-Process .\vs_community.exe /Passive /NoRestart /Layout .
 #        Start-Process .\vs_community.exe "/Passive /NoRestart /Layout ." -NoNewWindow -Wait
